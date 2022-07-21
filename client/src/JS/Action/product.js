@@ -1,9 +1,11 @@
 //import
 import axios from "axios";
 import {
+  FAIL_PRODUCT,
   FAIL_PRODUCTS,
   GET_PRODUCT,
   GET_PRODUCTS,
+  LOAD_PRODUCT,
   LOAD_PRODUCTS,
 } from "../ActionTypes/product";
 
@@ -20,20 +22,26 @@ export const getProducts = () => async (dispatch) => {
 };
 //get one product
 export const getOneProduct = (id) => async (dispatch) => {
-  dispatch({ type: LOAD_PRODUCTS });
+  dispatch({ type: LOAD_PRODUCT });
 
   try {
-    let result = await axios.get(`/api/prodcut/${id}`);
+    let result = await axios.get(`/api/product/${id}`);
     dispatch({ type: GET_PRODUCT, payload: result.data });
   } catch (error) {
-    dispatch({ type: FAIL_PRODUCTS, payload: error.response });
+    dispatch({ type: FAIL_PRODUCT, payload: error.response });
   }
 };
 
 //add product
 export const addProduct = (new_product) => async (dispatch) => {
+  dispatch({ type: LOAD_PRODUCT });
   try {
-    await axios.post("/api/prodcut/addProduct", new_product);
+    const config = {
+      headers: {
+        authorization: localStorage.getItem("token"),
+      },
+    };
+    await axios.post("/api/product/addProduct", new_product,config);
     dispatch(getProducts());
   } catch (error) {
     dispatch({ type: FAIL_PRODUCTS, payload: error.response });
@@ -42,17 +50,29 @@ export const addProduct = (new_product) => async (dispatch) => {
 
 //delete product
 export const deleteProduct = (id) => async (dispatch) => {
+  dispatch({ type: LOAD_PRODUCT });
   try {
-    await axios.delete(`/api/prodcut/deleteProduct/${id}`);
+    const config = {
+      headers: {
+        authorization: localStorage.getItem("token"),
+      },
+    };
+    await axios.delete(`/api/product/deleteProduct/${id}`,config);
     dispatch(getProducts());
   } catch (error) {
-    dispatch({ type: FAIL_PRODUCTS, payload: error.response });
+    dispatch({ type: FAIL_PRODUCT, payload: error.response });
   }
 };
 //edit product
 export const editProduct = (id, newProduct) => async (dispatch) => {
+  dispatch({ type: LOAD_PRODUCT });
   try {
-    await axios.put(`/api/prodcut/editProduct/${id}`, newProduct);
+    const config = {
+      headers: {
+        authorization: localStorage.getItem("token"),
+      },
+    };
+    await axios.put(`/api/product/editProduct/${id}`, newProduct,config);
     dispatch(getProducts());
   } catch (error) {
     dispatch({ type: FAIL_PRODUCTS, payload: error.response });

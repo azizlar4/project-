@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../JS/Action/product";
 import { Spinner } from "react-bootstrap";
 
-const ProductsList = () => {
+const ProductsList = ({ keyword }) => {
   const dispatch = useDispatch();
   const listProducts = useSelector(
     (state) => state.productReducer.listProducts
@@ -17,18 +17,21 @@ const ProductsList = () => {
   return (
     <div>
       <h2>List of products</h2>
-      <div     style={{
-        marginTop:"15px",
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "center",
-        textAlign: "center",
-      }}>
+      <div
+        style={{
+          marginTop: "15px",
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          textAlign: "center",
+        }}
+      >
         {load ? (
-          <Spinner animation="border" variant="secondary"/>
-  
+          <Spinner animation="border" variant="secondary" />
         ) : (
-          listProducts.map((el) => <ProductCard product={el} key={el.id} />)
+          listProducts
+            .filter((el) => el.name.toLowerCase().includes(keyword))
+            .map((el) => <ProductCard product={el} key={el.id} />)
         )}
       </div>
     </div>

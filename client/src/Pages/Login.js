@@ -25,10 +25,11 @@ const Login = () => {
   const handleUser = (e) => {
     e.preventDefault();
     dispatch(login(User));
-    navigate("/");
+    navigate(-1);
   };
   return (
-    <div style={{ width: "500px", margin: "auto", marginTop: "40px" }}>
+    <div style={{ width: "500px", margin: "auto", marginTop: "40px"
+    ,marginBottom:'190px' }}>
       <form>
         <h3>Sign In</h3>
         

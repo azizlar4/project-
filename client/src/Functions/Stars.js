@@ -9,7 +9,7 @@ const Rating = ( rating ) =>
     <FontAwesomeIcon
       key={i}
       icon={faStar}
-      color={rating >= i ? "red" : "lightgrey"}
+      color={rating >= i ? "#ff9f1a" : "lightgrey"}
     />
   ));
 

@@ -5,6 +5,7 @@ const isAuth = require("../middleware/isAuth");
 const isAdmin = require("../middleware/isAdmin");
 
 
+
 const {
   registerValidation,
   loginValidation,
@@ -26,6 +27,7 @@ router.post("/login", loginValidation(), validation, login);
 //current user
 router.get("/current", isAuth, (req, res) => {
   res.send(req.user);
+
 });
 
 module.exports = router;

@@ -7,7 +7,6 @@ import {
   LOAD_USER,
   LOGIN_USER,
   LOGOUT_USER,
-
   REGISTER_USER,
 } from "../ActionTypes/user";
 
@@ -56,7 +55,9 @@ export const current_user = () => async (dispatch) => {
     let result = await axios.get("/api/user/current", config);
     dispatch({ type: CURRENT_USER, payload: result.data });
   } catch (error) {
-    dispatch({ type: FAIL_USER, payload: error.response.data.errors });
+    dispatch({ type: FAIL_USER, payload: error.response});
+    console.log(error)
+
   }
 };
 

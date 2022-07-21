@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color:aliceblue;
 }
 
 .App-logo {
@@ -36,3 +37,24 @@
     transform: rotate(360deg);
   }
 }
+.product_box {
+  margin: 10px;
+}
+.product_box:hover {
+  border-radius: 20px;
+  box-shadow: 5px 11px 11px rgba(33,33,33,.2); 
+}
+
+footer {
+  position:relative;
+  padding: 10px 10px 0px 10px;
+  bottom: 0;
+  width: 100%;
+  /* Height of the footer*/ 
+  height: 40px;
+  background: #f8f9fa;
+  margin: auto;
+
+}
+
+.btn_nav:hove{color:green}

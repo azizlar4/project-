@@ -1,99 +1,132 @@
-import React from "react";
+import React, { useState } from "react";
 
-import Button from "@mui/material/Button";
+
 
 import CssBaseline from "@mui/material/CssBaseline";
-import Stack from "@mui/material/Stack";
-import Box from "@mui/material/Box";
 
-import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import Link from "@mui/material/Link";
+import Button from 'react-bootstrap/Button';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ProductsList from "../Components/ProductsList";
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
-
+import { Form, FormControl, Modal } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { addProduct } from "../JS/Action/product";
 
 const theme = createTheme();
 
-const Home = () => {
+
+const Home = ({ match }) => {
+  const [newProduct, setnewProduct] = useState({});
+  const dispatch=useDispatch();
+//MODAL
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const isAuth=useSelector(state=>state.userReducer.isAuth);
+  const isAdmin=useSelector(state=>state.userReducer.isAdmin);
+  const user=useSelector(state=>state.userReducer.user);
+  const [keyword,setKeyword]=useState("");
+
+  const handleChange=(e)=>{
+    setnewProduct({...newProduct,[e.target.name]:e.target.value})
+}
+ //handle edit product
+const handleAddProduct =()=>{
+  dispatch(addProduct(newProduct));
+  setShow(false);
+}
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <main>
-        {/* Hero unit */}
-       
-        <Container sx={{ py: 8 }} >
-         <ProductsList/>
+    <div>
+   
+      <ThemeProvider theme={theme} style={{minHeight:"100vh"}}>
+        <div style={{display:"flex",justifyContent:"space-around"}}>
+          {isAuth?(<p style={{position:"absolute",right: 150,border:"solid",padding:"5px",margin:"10px"}}>Hi, {user.name} </p>):null}
+        {isAdmin?(<Button onClick={handleShow} size="lg" variant="success" style={{position:"absolute",left: 150,border:"solid",padding:"10px",margin:"10px"}}>Add prodcut </Button>):null}
+        </div>
+      
+        <CssBaseline />
+        <main>
+          {/* Hero unit */}
+          <Form className="d-flex justify-content-center" style={{marginTop:40  }} > 
+        <FormControl
+          style={{ width: "450px" }}
+          type="search"
+          placeholder="Search"
+          className="me-2"
+          aria-label="Search"
+          name="search"
+          onChange={e=>setKeyword(e.target.value)}
+        />
+    
+        
+      </Form>
+  
+      <Container sx={{ py: 8}} >
+         <ProductsList keyword ={keyword} key ={keyword}/>
         </Container>
-        <Box
-          sx={{
-            bgcolor: "background.paper",
-            pt: 8,
-            pb: 6,
-          }}
-        >
-          <Container maxWidth="sm">
-            <Typography
-              component="h1"
-              variant="h2"
-              align="center"
-              color="text.primary"
-              gutterBottom
-            >
-              Fine Wine
-            </Typography>
-            <Typography
-              variant="h5"
-              align="center"
-              color="text.secondary"
-              paragraph
-            >
-              We are selling one of the finest wine in the market.
-            </Typography>
-            <Stack
-              sx={{ pt: 4 }}
-              direction="row"
-              spacing={2}
-              justifyContent="center"
-            >
-              <Button variant="contained">Main call to action</Button>
-              <Button variant="outlined">Secondary action</Button>
-            </Stack>
-          </Container>
-        </Box>
-      </main>
-      <hr/>
-      {/* Footer */}
-      <Box sx={{ bgcolor: "background.paper", p: 4 }} component="footer">
-        <Typography variant="h6" align="center" gutterBottom>
-          Footer
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          align="center"
-          color="text.secondary"
-          component="p"
-        >
-          Something here to give the footer a purpose!
-        </Typography>
-        <Copyright />
-      </Box>
-      {/* End footer */}
-    </ThemeProvider>
+        <Modal show={show} onHide={handleClose} animation={false} size="lg">
+        <Modal.Header closeButton>
+          <Modal.Title> Add new Product</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>Name </Form.Label>
+              <Form.Control
+                name="name"
+                type="text"
+                placeholder="Enter Name"
+                onChange={handleChange}
+              />
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                name="description"
+                type="text"
+                placeholder="Enter Description"
+                onChange={handleChange}
+              />
+              <Form.Label>Price</Form.Label>
+              <Form.Control
+                name="price"
+                type="number"
+                min={0}
+                placeholder="Enter Price"
+                onChange={handleChange}
+              />
+              <Form.Label>Quantity</Form.Label>
+              <Form.Control
+                name="quantity"
+                type="number"
+                min={0}
+                placeholder="Enter Quantity"
+                onChange={handleChange}
+              />
+              <Form.Label>Image_url</Form.Label>
+              <Form.Control
+                name="image_url"
+                type="text"
+                placeholder="Enter Image_url"
+                onChange={handleChange}
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleAddProduct}>
+            Add product
+          </Button>
+        </Modal.Footer>
+      </Modal>
+          
+         
+        </main>
+        
+      </ThemeProvider>
+    </div>
   );
 };
 

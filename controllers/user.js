@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 //get all Users
 exports.getUsers = async (req, res) => {
   try {
-    const listUsers = await User.find();
+    const listUsers = await User.find().populate('cart');
     res.status(200).send(listUsers);
   } catch (error) {
     res.status(400).send({ msg: "cannot get User list", error });

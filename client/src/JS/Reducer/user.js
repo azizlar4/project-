@@ -15,6 +15,7 @@ const initialState = {
   loadUser: false,
   errors: [],
   isAuth: false,
+  isAdmin: false
 };
 
 //pure function
@@ -24,12 +25,30 @@ const userReducer = (state = initialState, { type, payload }) => {
       return { ...state, loadUser: true };
     case REGISTER_USER:
       localStorage.setItem("token", payload.token);
-      return { ...state, user: payload.user, loadUser: false, isAuth: true };
+      return {
+        ...state,
+        user: payload.user,
+        loadUser: false,
+        isAuth: true,
+        isAdmin: payload.user.isAdmin,
+      };
     case LOGIN_USER:
       localStorage.setItem("token", payload.token);
-      return { ...state, loadUser: false, isAuth: true, user: payload.user };
+      return {
+        ...state,
+        loadUser: false,
+        isAuth: true,
+        user: payload.user,
+        isAdmin: payload.user.isAdmin,
+      };
     case CURRENT_USER:
-      return { ...state, loadUser: false, isAuth: true, user: payload };
+      return {
+        ...state,
+        loadUser: false,
+        isAuth: true,
+        user: payload,
+        isAdmin: payload.isAdmin,
+      };
     case LOGOUT_USER:
       localStorage.removeItem("token");
       return {
@@ -37,6 +56,7 @@ const userReducer = (state = initialState, { type, payload }) => {
         loadUser: false,
         errors: [],
         isAuth: false,
+        isAdmin: false
       };
     case FAIL_USER:
       return { ...state, errors: payload, loadUser: false };
@@ -45,5 +65,5 @@ const userReducer = (state = initialState, { type, payload }) => {
   }
 };
 
-//export 
+//export
 export default userReducer;

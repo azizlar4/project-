@@ -17,7 +17,8 @@ app.use(express.json())
 //8 routing
 app.use('/api/product',require('./routes/product'))
 app.use('/api/user',require('./routes/user'))
-app.use('/api/oder',require('./routes/order'))
+app.use('/api/order',require('./routes/order'))
+app.use('/api/cart',require('./routes/cart'))
 
 
 //3 port
