@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const UserModel = require("../models/UserModel");
 const ProductModel = require("../models/ProductModel");
-const { populate } = require("../models/UserModel");
+
 
 const toId = mongoose.Types.ObjectId;
 

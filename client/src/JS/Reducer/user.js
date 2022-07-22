@@ -1,6 +1,7 @@
 //import
 
 import {
+  CLEAR_ERRORS,
   CURRENT_USER,
   FAIL_USER,
   LOAD_USER,
@@ -13,7 +14,7 @@ import {
 const initialState = {
   user: null,
   loadUser: false,
-  errors: [],
+  errors: null,
   isAuth: false,
   isAdmin: false
 };
@@ -54,12 +55,14 @@ const userReducer = (state = initialState, { type, payload }) => {
       return {
         user: null,
         loadUser: false,
-        errors: [],
+        errors: null,
         isAuth: false,
         isAdmin: false
       };
     case FAIL_USER:
       return { ...state, errors: payload, loadUser: false };
+    case CLEAR_ERRORS:
+      return { ...state, errors:null };
     default:
       return state;
   }

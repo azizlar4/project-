@@ -57,7 +57,7 @@ const handleCartClick=()=>{navigate('/cart')}
             {isAdmin?<Link to="/dashboard"><Button style={{color:"black" , textDecoration: 'none'}} variant="link">DashBoard</Button></Link>:null}
             {isAuth &&!isAdmin?<img onClick={handleCartClick} src={cart} alt="" width="30" />:null}
            
-          
+      
           </Nav>
         </Container>
      

@@ -1,6 +1,7 @@
 //import
 import axios from "axios";
 import {
+  CLEAR_ERRORS,
   CURRENT_USER,
   FAIL_USER,
   GET_USERS,
@@ -65,3 +66,7 @@ export const current_user = () => async (dispatch) => {
 export const logout = () => (dispatch) => {
   dispatch({ type: LOGOUT_USER });
 };
+//LOGOUT
+export const clearErrors =() => {
+ return {type:CLEAR_ERRORS}
+}

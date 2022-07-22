@@ -5,19 +5,15 @@ import CartItem from '../Components/CartItem'
 const Cart = () => {
   
   return (
+    
     <div>
     {/*---- Include the above in your HEAD tag --------*/}
-    
     <div className="card">
       <div className="card-header bg-dark text-light">
         <a href="/" className="btn btn-outline-info btn-sm pull-right">Continue shopping</a>
       </div>
       <div className="card-body">
-       
         <CartItem/>
-     
-        
-       
       </div>
       <div className="card-footer">
         <a href="www.google.com" className="btn btn-success pull-right">Pay</a>
@@ -26,8 +22,7 @@ const Cart = () => {
         </div>
       </div>
     </div>
-  </div>
-      
+  </div>     
      
   )
 }

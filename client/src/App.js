@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Footer from "./Components/Footer";
 import NavBar from "./Components/NavBar";
+import Notification from "./Components/Notification";
 import { current_cart } from "./JS/Action/cart";
 import { current_user } from "./JS/Action/user";
 
@@ -19,9 +20,10 @@ function App() {
 
   useEffect(() => {
  if(localStorage.getItem('token')){
+
   dispatch(current_user())
   dispatch(current_cart())
-  
+
   
  } 
   }, [dispatch])
@@ -40,6 +42,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/*" element={<Error />} />
+       
       </Routes>
       <Footer/>
     </div>
