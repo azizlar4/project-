@@ -18,7 +18,7 @@ export const getUsers = () => async (dispatch) => {
     let result = await axios.get("/api/user/allUsers");
     dispatch({ type: GET_USERS, payload: result.data });
   } catch (error) {
-    dispatch({ type: FAIL_USER, payload: error.response.data.errors });
+    dispatch({ type: FAIL_USER, payload:error.response.data.errors });
   }
 };
 
@@ -39,6 +39,7 @@ export const login = (user) => async (dispatch) => {
   try {
     let result = await axios.post("/api/user/login", user);
     dispatch({ type: LOGIN_USER, payload: result.data });
+    
   } catch (error) {
     dispatch({ type: FAIL_USER, payload: error.response.data.errors });
   }

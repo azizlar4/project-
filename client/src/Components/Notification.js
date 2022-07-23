@@ -4,13 +4,13 @@ import { useDispatch } from "react-redux";
 import { clearErrors } from "../JS/Action/user";
 
 const Notification = ({ error }) => {
-  console.log(error);
+  console.log(error.msg);
   const [show, setshow] = useState(true);
   const dispatch = useDispatch();
 
   useEffect(() => {
     setTimeout(() => {
-      setshow(false);
+      setshow(true);
       dispatch(clearErrors());
     }, 3000);
   }, [show, dispatch]);

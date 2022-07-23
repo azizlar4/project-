@@ -60,7 +60,7 @@ const userReducer = (state = initialState, { type, payload }) => {
         isAdmin: false
       };
     case FAIL_USER:
-      return { ...state, errors: payload, loadUser: false };
+      return { ...state, errors:payload, loadUser: false };
     case CLEAR_ERRORS:
       return { ...state, errors:null };
     default:
