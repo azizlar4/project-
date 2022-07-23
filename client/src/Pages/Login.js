@@ -20,7 +20,7 @@ const Login = () => {
   const handleUser = (e) => {
     e.preventDefault();
     dispatch(login(User))
-    navigate('/register')
+    navigate('/')
   
   };
   return (
