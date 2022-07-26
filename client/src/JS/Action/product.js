@@ -78,3 +78,17 @@ export const editProduct = (id, newProduct) => async (dispatch) => {
     dispatch({ type: FAIL_PRODUCTS, payload: error.response });
   }
 };
+//edit added quantity product
+export const editAddedQuantityProduct = (id, newProduct) => async (dispatch) => {
+  dispatch({ type: LOAD_PRODUCT });
+  try {
+    const config = {
+      headers: {
+        authorization: localStorage.getItem("token"),
+      },
+    };
+    await axios.put(`/api/product/${id}`, newProduct,config);
+  } catch (error) {
+    dispatch({ type: FAIL_PRODUCTS, payload: error.response });
+  }
+};

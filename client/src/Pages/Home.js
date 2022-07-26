@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 
 
@@ -22,7 +22,8 @@ const Home = ({ match }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
+  const errors = useSelector((state) => state.userReducer.errors);
+  const loading = useSelector((state) => state.userReducer.loadUser);
   const isAuth=useSelector(state=>state.userReducer.isAuth);
   const isAdmin=useSelector(state=>state.userReducer.isAdmin);
   const user=useSelector(state=>state.userReducer.user);
@@ -31,6 +32,10 @@ const Home = ({ match }) => {
   const handleChange=(e)=>{
     setnewProduct({...newProduct,[e.target.name]:e.target.value})
 }
+useEffect(() => {
+  localStorage.getItem('token')
+})
+
  //handle edit product
 const handleAddProduct =()=>{
   dispatch(addProduct(newProduct));
@@ -38,8 +43,9 @@ const handleAddProduct =()=>{
 }
   return (
     <div>
+
    
-      <ThemeProvider theme={theme} style={{minHeight:"100vh"}}>
+      <ThemeProvider theme={theme}>
         <div style={{display:"flex",justifyContent:"space-around"}}>
           {isAuth?(<p style={{position:"absolute",right: 150,border:"solid",padding:"5px",margin:"10px"}}>Hi, {user.name} </p>):null}
         {isAdmin?(<Button onClick={handleShow} size="lg" variant="success" style={{position:"absolute",left: 150,border:"solid",padding:"10px",margin:"10px"}}>Add prodcut </Button>):null}

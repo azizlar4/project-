@@ -1,46 +1,61 @@
-import { display, style } from "@mui/system";
 import React, { useEffect, useState } from "react";
+import { Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import Rating from "../Functions/Stars";
-import { addToCart } from "../JS/Action/cart";
-import { getOneProduct } from "../JS/Action/product";
-import '../productDetails.css'
-
+import Notification from "../../Components/Notification";
+import Rating from "../../Functions/Stars";
+import { addToCart, clearErrors } from "../../JS/Action/cart";
+import { editAddedQuantityProduct, getOneProduct } from "../../JS/Action/product";
+import "./productDetails.css";
 
 const Product = () => {
-
-  const [quantity, setquantity] = useState(1);
-  const navigate =useNavigate();
+  const errors = useSelector((state) => state.cartReducer.errors);
+  const succ = useSelector((state) => state.cartReducer.succ);
+  const loading = useSelector((state) => state.cartReducer.loadCart);
+  const [quantity, setquantity] = useState({quantity_added: '1'});
+  const navigate = useNavigate();
   const { id } = useParams();
   const dispatch = useDispatch();
-  const isAuth=useSelector(state=>state.userReducer.isAuth);
-  const isAdmin=useSelector(state=>state.userReducer.isAdmin);
-  const user=useSelector(state=>state.userReducer.user);
+  const isAuth = useSelector((state) => state.userReducer.isAuth);
+  const isAdmin = useSelector((state) => state.userReducer.isAdmin);
+  const user = useSelector((state) => state.userReducer.user);
   const product = useSelector((state) => state.productReducer.productToGet);
 
-  
   useEffect(() => {
     dispatch(getOneProduct(id));
-  }, [dispatch]);
-  
+    if(succ){
+      
+      navigate(`/cart`)
+      dispatch(clearErrors())
+ }
+  }, [dispatch, id,quantity,succ,navigate]);
 
   var quantityAvailable = Array.from(
     { length: product.quantity },
-    (_, i) => i + 1
+    (_, i) => i +1
   );
 
-
   const AddToCartHandle = (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    if (!isAuth) {
+      navigate("/login");}
+
+      dispatch(editAddedQuantityProduct(id,quantity));
+      dispatch(addToCart(user._id, id));
+      console.log(quantity)
    
-    isAuth?navigate(`/cart/${id}?qty=${quantity}`):navigate('/login')
-    dispatch(addToCart(user._id,id))
-    
   };
+
+ 
   
+
+
   return (
-    <div >
+    <div>
+       {errors&&<Notification error={errors.data}/>}
+
+      {loading && <Spinner animation="border" variant="secondary" />}
+
       <link />
       {/*---- Include the above in your HEAD tag --------*/}
       <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -72,11 +87,15 @@ const Product = () => {
                 </h4>
 
                 <h5 className="sizes">
-                  quantity   
+                  quantity
                   <select
+                  name="quantity_added"
                     id="product-variant-select-1"
                     className="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"
-                  value={quantity} onChange={(e)=>setquantity(e.target.value)}>
+                    value={quantity.quantity_added}
+                    
+                    onChange={(e) => setquantity({[e.target.name]:e.target.value})}
+                  >
                     {quantityAvailable.map((el) => (
                       <option value={el}>{el}</option>
                     ))}
@@ -84,15 +103,15 @@ const Product = () => {
                 </h5>
 
                 <div className="action">
-                {isAdmin?null:<button
-                    className="add-to-cart"
-                    type="button"
-                    onClick={AddToCartHandle}
-                  >
-                    add to cart
-                  </button>}
-                  
-                  
+                  {isAdmin ? null : (
+                    <button
+                      className="add-to-cart"
+                      type="button"
+                      onClick={AddToCartHandle}
+                    >
+                      add to cart
+                    </button>
+                  )}
                 </div>
               </div>
             </div>

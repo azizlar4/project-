@@ -81,6 +81,7 @@ const handleDelteProduct =()=>{
           </Card.Body>
         ) : null}
       </Card>
+{/* modal delete Product */}
       <Modal
         show={showDelete}
         onHide={handleCloseDelete}
@@ -100,7 +101,7 @@ const handleDelteProduct =()=>{
           <Button variant="primary" onClick={handleDelteProduct}>Yes!</Button>
         </Modal.Footer>
       </Modal>
-
+        {/* Modal Edit product */}
       <Modal show={showEdit} onHide={handleCloseEdit} animation={false} size="lg">
         <Modal.Header closeButton>
           <Modal.Title>Edit {product.name}</Modal.Title>

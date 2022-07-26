@@ -62,7 +62,7 @@ exports.login = async (req, res) => {
         id: foundUser._id,
       },
       process.env.SECRET_KEY,
-      { expiresIn: "1h" }
+      { expiresIn: "7d" }
     );
     res.status(200).send({ msg: "Login Succ ...", user: foundUser, token });
   } catch (error) {

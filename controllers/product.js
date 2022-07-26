@@ -54,6 +54,17 @@ exports.editProduct = async (req, res) => {
     res.status(400).send({ msg: "cannot edit product ", error });
   }
 };
+exports.SetQuantityAdded =async (req,res)=>{
+  try {
+    const { _id } = req.params;
+    await Product.updateOne({ _id }, { $set: { ...req.body } });
+    res
+      .status(200)
+      .send({ msg: `quantity added of product with id ${req.params._id} is updated` });
+  } catch (error) {
+    res.status(400).send({ msg: "cannot edit product ", error });
+  }
+}
 
 //delete product
 exports.deleteproduct = async (req, res) => {

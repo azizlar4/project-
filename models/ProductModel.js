@@ -13,6 +13,8 @@ const productSchema = new schema(
     price: { type: Number, require: true },
     quantity: { type: Number, require: true },
     rating: { type: Number, require: true },
+    quantity_added: { type: Number, require: false }
+
   },
   {
     timestamps: true,

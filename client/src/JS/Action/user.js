@@ -10,6 +10,7 @@ import {
   LOGOUT_USER,
   REGISTER_USER,
 } from "../ActionTypes/user";
+import { emptyCart } from "./cart";
 
 //get all users
 export const getUsers = () => async (dispatch) => {
@@ -64,10 +65,11 @@ export const current_user = () => async (dispatch) => {
 };
 
 //LOGOUT
-export const logout = () => (dispatch) => {
+export const logout = (user_id) => (dispatch) => {
   dispatch({ type: LOGOUT_USER });
+  dispatch(emptyCart(user_id))
 };
-//LOGOUT
+//clear error
 export const clearErrors =() => {
  return {type:CLEAR_ERRORS}
 }

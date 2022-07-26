@@ -16,7 +16,7 @@ const router = express.Router();
 //get user's cart
 router.get("/",isAuth,getCart )
 
-//create cart
+//add item to cart
 router.get("/:user/:product/",CartAddItem );
 
 //delete item from cart 
@@ -24,6 +24,7 @@ router.delete("/:user/:product/",CartDeleteItem );
 
 // empty the cart
 router.delete("/:user",EmptyCart );
+
 
 //export
 module.exports = router;
