@@ -1,9 +1,12 @@
 //import
 
 import {
+  CLEAR_EDIT,
   CLEAR_ERRORS,
   CURRENT_USER,
+  EDIT_USER,
   FAIL_USER,
+  GET_USERS,
   LOAD_USER,
   LOGIN_USER,
   LOGOUT_USER,
@@ -12,11 +15,13 @@ import {
 
 //initial state
 const initialState = {
+  users:[],
   user: null,
   loadUser: false,
   errors: null,
   isAuth: false,
-  isAdmin: false
+  isAdmin: false,
+  edit:null
 };
 
 //pure function
@@ -24,6 +29,8 @@ const userReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case LOAD_USER:
       return { ...state, loadUser: true };
+    case GET_USERS:
+      return { ...state, loadUser: false,users:payload };
     case REGISTER_USER:
       localStorage.setItem("token", payload.token);
       return {
@@ -49,6 +56,18 @@ const userReducer = (state = initialState, { type, payload }) => {
         isAuth: true,
         user: payload,
         isAdmin: payload.isAdmin,
+      };
+    case EDIT_USER:
+      return {
+        ...state,
+        loadUser: false,
+        edit:payload
+      };
+    case CLEAR_EDIT:
+      return {
+        ...state,
+        loadUser: false,
+        edit:null
       };
     case LOGOUT_USER:
       localStorage.removeItem("token");

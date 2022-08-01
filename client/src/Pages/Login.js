@@ -41,7 +41,7 @@ const Login = () => {
 
     
 
-},[navigate,user,errors,dispatch])
+},[navigate,user,dispatch])
 
   return (
 
@@ -51,6 +51,7 @@ const Login = () => {
       ,marginBottom:'190px' }}>
         
         {errors && errors.map(el=><Notification error={el}/>)}
+     
         {loading && <Spinner animation="border" variant="secondary" />}
      
         <Form > 

@@ -1,6 +1,8 @@
 //import
 import axios from "axios";
 import {
+  CLEAR_EDIT,
+  EDIT_PRODUCT,
   FAIL_PRODUCT,
   FAIL_PRODUCTS,
   GET_PRODUCT,
@@ -87,7 +89,26 @@ export const editAddedQuantityProduct = (id, newProduct) => async (dispatch) => 
         authorization: localStorage.getItem("token"),
       },
     };
-    await axios.put(`/api/product/${id}`, newProduct,config);
+    let result =await axios.put(`/api/product/${id}`, newProduct,config);
+    dispatch({type:EDIT_PRODUCT,payload:result.data})
+    dispatch({type:CLEAR_EDIT})
+  } catch (error) {
+    dispatch({ type: FAIL_PRODUCTS, payload: error.response });
+  }
+};
+//edit added quantity product to null
+export const AddedQuantityProduct_null = () => async (dispatch) => {
+  dispatch({ type: LOAD_PRODUCT });
+  try {
+    const config = {
+      headers: {
+        authorization: localStorage.getItem("token"),
+      },
+    };
+    let result = await axios.get(`/api/product/null_quantity_add`,config);
+    dispatch({type:EDIT_PRODUCT,payload:result.data})
+    dispatch({type:CLEAR_EDIT})
+
   } catch (error) {
     dispatch({ type: FAIL_PRODUCTS, payload: error.response });
   }

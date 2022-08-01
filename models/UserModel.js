@@ -13,11 +13,11 @@ const userSchema = new schema({
   phone: { type: Number, require: true },
   isAdmin: { type: Boolean, require: true, default: false },
 
-  cart: [
-    {type:mongoose.Types.ObjectId, ref: "product"}
-  ],
+  cart: [{ type: mongoose.Types.ObjectId, ref: "product" }],
+} ,
+{
+  timestamps: true,
 });
-
 
 //export
 module.exports = User = mongoose.model("user", userSchema);

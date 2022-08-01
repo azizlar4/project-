@@ -2,11 +2,10 @@ const User = require("../models/UserModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-
 //get all Users
 exports.getUsers = async (req, res) => {
   try {
-    const listUsers = await User.find().populate('cart');
+    const listUsers = await User.find().populate("cart");
     res.status(200).send(listUsers);
   } catch (error) {
     res.status(400).send({ msg: "cannot get User list", error });
@@ -66,8 +65,37 @@ exports.login = async (req, res) => {
     );
     res.status(200).send({ msg: "Login Succ ...", user: foundUser, token });
   } catch (error) {
+    res.status(400).send({ errors: [{ msg: "Cannot login the User !!! !!" }] });
+  }
+};
+//update profile's password
+exports.updatePassword = async (req, res) => {
+  try {
+    const { password } = req.body;
+    const user_id = await req.user._id;
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    const updatedUser = { ...req.body };
+    updatedUser.password = hashedPassword;
+
+    await User.updateOne({ _id: user_id }, { $set: updatedUser });
     res
-      .status(400)
-      .send({ errors: [{ msg: "Can not login the User !!! !!" }] });
+      .status(200)
+      .send({ msg: `Password of profile with id ${user_id} is updated` });
+  } catch (error) {
+    res.status(400).send({ errors: [{ msg: "Cannot update password !!" }] });
+  }
+};
+
+//update profile
+exports.updateProfile = async (req, res) => {
+  try {
+    const user_id = await req.user._id;
+    const updatedUser = { ...req.body };
+
+    await User.updateOne({ _id: user_id }, { $set: updatedUser });
+    res.status(200).send({ msg: `profile with id ${user_id} is updated` });
+  } catch (error) {
+    res.status(400).send({ errors: [{ msg: "Cannot update profile !!" }] });
   }
 };

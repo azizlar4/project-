@@ -22,8 +22,7 @@ const Home = ({ match }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const errors = useSelector((state) => state.userReducer.errors);
-  const loading = useSelector((state) => state.userReducer.loadUser);
+
   const isAuth=useSelector(state=>state.userReducer.isAuth);
   const isAdmin=useSelector(state=>state.userReducer.isAdmin);
   const user=useSelector(state=>state.userReducer.user);

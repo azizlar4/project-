@@ -15,7 +15,7 @@ const CartItem = ({cart_item}) => {
       <img className="img-responsive" src={cart_item.image_url} alt="prewiew" />
     </div>
     <div className="col-xs-4 col-md-6">
-      <h4 className="product-name"><strong>{cart_item.name}</strong></h4><h4><small>{cart_item.description}</small></h4>
+      <h4 className="product-name"><strong>{cart_item.name}</strong></h4><h5><small>{cart_item.description}</small></h5>
     </div>
     <div className="col-xs-6 col-md-4 row">
       <div className="col-xs-6 col-md-6 text-right" style={{paddingTop: '5px'}}>

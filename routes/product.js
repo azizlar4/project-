@@ -1,6 +1,6 @@
 //express
 const express =require ('express');
-const { getProducts, addProduct, editProduct, deleteproduct, getOneProduct ,SetQuantityAdded} = require('../controllers/product');
+const { getProducts, addProduct, editProduct, deleteproduct, getOneProduct ,SetQuantityAdded, setQuantity_addedtoNull} = require('../controllers/product');
 const isAdmin = require("../middleware/isAdmin");
 const isAuth = require("../middleware/isAuth");
 
@@ -10,6 +10,9 @@ const router =express.Router();
 
 //get all products
 router.get('/allProducts',getProducts)
+
+//set quantity added
+router.get("/null_quantity_add",isAuth,setQuantity_addedtoNull );
 
 //get one product
 router.get('/:_id',getOneProduct)
@@ -25,6 +28,8 @@ router.delete('/deleteProduct/:_id',isAdmin,deleteproduct)
 
 //set quantity added
 router.put("/:_id",isAuth,SetQuantityAdded );
+
+
 
 
 //export

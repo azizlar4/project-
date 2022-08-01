@@ -75,11 +75,12 @@ const Product = () => {
 
               <div className="details col-md-6">
                 <h3 className="product-title">{product.name}</h3>
+                <h4 className="product-title">{product.brand}</h4>
                 <div className="rating">
                   <div className="stars" style={{ marginBottom: "5px" }}>
                     {Rating(product.rating)}
                   </div>
-                  <span className="review-no">41 reviews</span>
+              
                 </div>
                 <p className="product-description">{product.description}</p>
                 <h4 className="price">

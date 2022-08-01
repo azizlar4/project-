@@ -1,8 +1,10 @@
 //import
 import axios from "axios";
 import {
+  CLEAR_EDIT,
   CLEAR_ERRORS,
   CURRENT_USER,
+  EDIT_USER,
   FAIL_USER,
   GET_USERS,
   LOAD_USER,
@@ -16,7 +18,12 @@ import { emptyCart } from "./cart";
 export const getUsers = () => async (dispatch) => {
   dispatch({ type: LOAD_USER });
   try {
-    let result = await axios.get("/api/user/allUsers");
+    const config = {
+      headers: {
+        authorization: localStorage.getItem("token"),
+      },
+    };
+    let result = await axios.get("/api/user/allUsers",config);
     dispatch({ type: GET_USERS, payload: result.data });
   } catch (error) {
     dispatch({ type: FAIL_USER, payload:error.response.data.errors });
@@ -58,18 +65,53 @@ export const current_user = () => async (dispatch) => {
     let result = await axios.get("/api/user/current", config);
     dispatch({ type: CURRENT_USER, payload: result.data });
   } catch (error) {
-    dispatch({ type: FAIL_USER, payload: error.response});
+    dispatch({ type: FAIL_USER, payload: error.response.data.errors});
     console.log(error)
 
+  }
+};
+//edit Profile
+export const updateProfile = (newProfile) => async (dispatch) => {
+  dispatch({ type: LOAD_USER });
+  try {
+    const config = {
+      headers: {
+        authorization: localStorage.getItem("token"),
+      },
+    };
+   let result= await axios.put(`/api/user/updateProfile`, newProfile,config);
+   dispatch({type:EDIT_USER,payload:result.data})
+  } catch (error) {
+    dispatch({ type: FAIL_USER, payload: error.response.data.errors });
+  }
+};
+//edit password
+export const updatePassword = (newPass) => async (dispatch) => {
+  dispatch({ type: LOAD_USER });
+  try {
+    const config = {
+      headers: {
+        authorization: localStorage.getItem("token"),
+      },
+    };
+   let result= await axios.put(`/api/user/updatePassword`, newPass,config);
+   dispatch({type:EDIT_USER,payload:result.data})
+  } catch (error) {
+    dispatch({ type: FAIL_USER, payload: error.response.data.errors });
   }
 };
 
 //LOGOUT
 export const logout = (user_id) => (dispatch) => {
-  dispatch({ type: LOGOUT_USER });
   dispatch(emptyCart(user_id))
+  dispatch({ type: LOGOUT_USER });
+ 
 };
 //clear error
 export const clearErrors =() => {
  return {type:CLEAR_ERRORS}
+}
+//clear edit
+export const clearEdit =() => {
+ return {type:CLEAR_EDIT}
 }

@@ -8,12 +8,13 @@ const schema = mongoose.Schema;
 const productSchema = new schema(
   {
     name: { type: String, require: true },
+    brand: { type: String, require: true },
     description: { type: String, require: false },
     image_url: { type: String, require: true },
     price: { type: Number, require: true },
     quantity: { type: Number, require: true },
     rating: { type: Number, require: true },
-    quantity_added: { type: Number, require: false }
+    quantity_added: { type: Number, require: true,dafualt:0 }
 
   },
   {

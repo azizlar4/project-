@@ -7,4 +7,5 @@ export const GET_PRODUCT="GET_PRODUCT";
 export const LOAD_PRODUCT="LOAD_PRODUCT";
 export const EDIT_PRODUCT="EDIT_PRODUCT";
 export const FAIL_PRODUCT="FAIL_PRODUCT";
+export const CLEAR_EDIT="CLEAR_EDIT";
 

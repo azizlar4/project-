@@ -25,9 +25,10 @@ exports.getOneProduct = async (req, res) => {
 //add product
 exports.addProduct = async (req, res) => {
   try {
-    const { name, description, image_url, price, quantity, rating } = req.body;
+    const { name,brand, description, image_url, price, quantity, rating } = req.body;
     const newProduct = new Product({
       name,
+      brand,
       description,
       image_url,
       price,
@@ -38,7 +39,7 @@ exports.addProduct = async (req, res) => {
 
     res.status(200).send({ msg: "product added", newProduct });
   } catch (error) {
-    res.status(400).send({ msg: "cannot get product list", error });
+    res.status(400).send({ msg: "cannot add product list", error });
   }
 };
 
@@ -54,6 +55,8 @@ exports.editProduct = async (req, res) => {
     res.status(400).send({ msg: "cannot edit product ", error });
   }
 };
+
+//
 exports.SetQuantityAdded =async (req,res)=>{
   try {
     const { _id } = req.params;
@@ -66,6 +69,17 @@ exports.SetQuantityAdded =async (req,res)=>{
   }
 }
 
+//update quantity after order
+exports.setQuantity_addedtoNull =async (req,res)=>{
+try {
+  await Product.updateMany({},{ $set: { quantity_added:0} });
+  res
+  .status(200)
+  .send({ msg: `quantity added of all products is null! ` });
+} catch (error) {
+  res.status(400).send({ msg: "cannot set quantity ", error });
+}
+}
 //delete product
 exports.deleteproduct = async (req, res) => {
   try {

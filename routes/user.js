@@ -1,6 +1,6 @@
 //1
 const express = require("express");
-const { register, login, getUsers } = require("../controllers/user");
+const { register, login, getUsers, updateProfile, updatePassword } = require("../controllers/user");
 const isAuth = require("../middleware/isAuth");
 const isAdmin = require("../middleware/isAdmin");
 
@@ -10,6 +10,8 @@ const {
   registerValidation,
   loginValidation,
   validation,
+  profileValidation,
+  passwordValidation,
 } = require("../middleware/validator");
 
 //2
@@ -29,5 +31,11 @@ router.get("/current", isAuth, (req, res) => {
   res.send(req.user);
 
 });
+
+//update password
+router.put('/updatePassword',isAuth,passwordValidation(),validation,updatePassword)
+
+//update Profile
+router.put('/updateProfile',isAuth,profileValidation(),validation,updateProfile)
 
 module.exports = router;

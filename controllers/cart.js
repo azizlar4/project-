@@ -23,7 +23,7 @@ exports.CartAddItem = async (req, res) => {
 
 
     if (user2.cart.includes(toId(product))) {
-      return res.status(400).json({ msg: `${product._id} already in cart` });
+      return res.status(400).json({ msg: `This product already in cart !` });
     }
    
     user.cart.push(product);

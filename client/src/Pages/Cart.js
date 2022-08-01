@@ -5,6 +5,7 @@ import CartItem from "../Components/CartItem";
 
 import { Button, Spinner } from "react-bootstrap";
 import { current_cart, emptyCart } from "../JS/Action/cart";
+import { AddedQuantityProduct_null } from "../JS/Action/product";
 
 const Cart = () => {
   const cartItems = useSelector((state) => state.cartReducer.cartItems);
@@ -27,13 +28,16 @@ const Cart = () => {
   }, [dispatch,tot]);
 
   const HandleEmptyCart=()=>{
-dispatch(emptyCart(user._id))
+  dispatch(emptyCart(user._id))
+  dispatch(AddedQuantityProduct_null())
   }
+
 
   return (
  
     
       <div className="card">
+        {console.log(total)}
         
         <div className="card-header bg-dark text-light">
           <a href="/" className="btn btn-outline-info btn-sm pull-right">
@@ -48,7 +52,7 @@ dispatch(emptyCart(user._id))
             .map((el) => <CartItem cart_item={el} key={el.id} />))}
         </div>
         <div className="card-footer">
-          <a href="/payment" className="btn btn-success pull-right">
+          <a href={cartItems.length?`/payment/${total}`:null} className="btn btn-success pull-right">
             Pay
           </a>
           <div className="pull-right" style={{ margin: "5px" }}>
@@ -58,6 +62,7 @@ dispatch(emptyCart(user._id))
       </div>
    
   );
+
 };
 
 export default Cart;
