@@ -31,7 +31,7 @@ const ProductsList = ({ keyword }) => {
         ) : (
           listProducts
             .filter((el) => el.name.toLowerCase().includes(keyword))
-            .map((el) => <ProductCard product={el} key={el.id} />)
+            .map((el) => <ProductCard product={el} key={el._id} />)
         )}
       </div>
     </div>

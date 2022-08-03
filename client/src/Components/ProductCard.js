@@ -34,14 +34,16 @@ const handleDelteProduct =()=>{
   setShowDelete(false);
 
 }
-
+const handleCardClick =()=>{
+   navigate(`/product/${product._id}`)
+}
 
 
 
   return (
     <div className="product_box">
       <Card style={{ width: "18rem" }}>
-        <Card.Body onClick={(e) => navigate(`/product/${product._id}`)}>
+        <Card.Body onClick={handleCardClick}>
           <Card.Img variant="top" src={product.image_url} />
           <hr />
           <Card.Title>{product.name}</Card.Title>

@@ -20,8 +20,8 @@ const Home = ({ match }) => {
   const dispatch=useDispatch();
 //MODAL
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleClose = () =>{ setShow(false)};
+  const handleShow = () => {setShow(true)};
 
   const isAuth=useSelector(state=>state.userReducer.isAuth);
   const isAdmin=useSelector(state=>state.userReducer.isAdmin);

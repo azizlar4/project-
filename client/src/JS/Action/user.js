@@ -64,7 +64,7 @@ export const current_user = () => async (dispatch) => {
     };
     let result = await axios.get("/api/user/current", config);
     dispatch({ type: CURRENT_USER, payload: result.data });
-    dispatch(emptyCart(user_id))
+    
   } catch (error) {
     dispatch({ type: FAIL_USER, payload: error.response.data.errors});
     console.log(error)
