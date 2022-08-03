@@ -1,6 +1,6 @@
 //1
 const express = require("express");
-const { register, login, getUsers, updateProfile, updatePassword } = require("../controllers/user");
+const { register, login, getUsers, updateProfile, updatePassword, updateMyProfile } = require("../controllers/user");
 const isAuth = require("../middleware/isAuth");
 const isAdmin = require("../middleware/isAdmin");
 
@@ -12,6 +12,7 @@ const {
   validation,
   profileValidation,
   passwordValidation,
+  AdminprofileValidation,
 } = require("../middleware/validator");
 
 //2
@@ -36,6 +37,9 @@ router.get("/current", isAuth, (req, res) => {
 router.put('/updatePassword',isAuth,passwordValidation(),validation,updatePassword)
 
 //update Profile
-router.put('/updateProfile',isAuth,profileValidation(),validation,updateProfile)
+router.put('/updateMyProfile',isAuth,profileValidation(),validation,updateMyProfile)
+
+//update Profile by admin
+router.put('/updateProfile/:_id',isAdmin,AdminprofileValidation(),validation,updateProfile)
 
 module.exports = router;

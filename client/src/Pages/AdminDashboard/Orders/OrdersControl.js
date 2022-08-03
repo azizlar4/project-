@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Spinner, Table } from 'react-bootstrap'
+import {  Spinner, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
 
 import SideBar from '../SideBar'
@@ -36,7 +36,7 @@ useEffect(() => {
       <link rel="stylesheet" href="css/style.css" />
       <div className="wrapper d-flex align-items-stretch">
 
-    <SideBar active="1"/>
+    <SideBar active="2"/>
     <div id="content" className="p-4 p-md-5 pt-5">
           <h2>Users List</h2>
           <Table striped bordered hover variant="dark">
@@ -67,7 +67,9 @@ useEffect(() => {
            
             </tbody>
           </Table>
+        
         </div>
+      
         </div>
         </div>
        

@@ -16,13 +16,14 @@ const Notification = ({ error }) => {
         }, 3000);
     }, [show, dispatch]);
     return (
-        <div>
+        <div >
        {show && 
             
            
-            <Alert
+            <Alert 
                 position="bottom-right"
                 variant='danger'
+                
               
              
          

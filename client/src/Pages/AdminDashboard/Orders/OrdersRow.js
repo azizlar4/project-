@@ -20,7 +20,7 @@ const OrdersRow = ({order}) => {
     <td> {order.city } {order.address } </td>
     <td>{order.postalCode}</td>
     
-    <td>{order.isPaid? <button onClick={()=>dispatch(editPayment(order._id,{isPaid:!order.isPaid}))} style={{backgroundColor:"green", padding:1,borderRadius:15 ,fontSize:12,fontWeight:"bold" , color:"white"}}>Paid</button>:<button onClick={()=>dispatch(editPayment(order._id,{isPaid:!order.isPaid}))} style={{backgroundColor:"red", padding:1,borderRadius:15 ,fontSize:12,fontWeight:"bold"}}>Not Yet</button>}</td>
+    <td>{order.isPaid? <button onClick={()=>dispatch(editPayment(order._id,{isPaid:!order.isPaid}))} style={{backgroundColor:"green", padding:1,borderRadius:15 ,fontSize:12,fontWeight:"bold" , color:"white"}}>Paid</button>:<button onClick={()=>dispatch(editPayment(order._id,{isPaid:!order.isPaid}))} style={{backgroundColor:"red", padding:1,borderRadius:15 ,fontSize:12,fontWeight:"bold",color:"white" }}>Not Yet</button>}</td>
     <td><span >{order.isDeliverd?<button onClick={()=>dispatch(editPayment(order._id,{isDeliverd:!order.isDeliverd}))} style={{backgroundColor:"green", padding:1,borderRadius:15 ,fontSize:12,fontWeight:"bold" , color:"white"}}>Delivred</button>:<button onClick={()=>dispatch(editPayment(order._id,{isDeliverd:!order.isDeliverd}))} style={{backgroundColor:"red", padding:1,borderRadius:15 ,fontSize:12,fontWeight:"bold",color:"white"}}>Not Delivred</button>}</span></td>
     <td> {moment(order.createdAt).format('lll')  }</td>
  

@@ -32,6 +32,7 @@ const Home = ({ match }) => {
     setnewProduct({...newProduct,[e.target.name]:e.target.value})
 }
 useEffect(() => {
+  
   localStorage.getItem('token')
 })
 

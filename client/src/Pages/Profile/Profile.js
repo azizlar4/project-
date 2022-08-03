@@ -32,10 +32,11 @@ const Profile = () => {
   };
   const handleChnage = (e) => {
     setUser({ ...User, [e.target.name]: e.target.value });
+    console.log(User)
   };
 
   useEffect(() => {
-    setUser({ name: user.name, last_name: user.last_name });
+    setUser({ name: user.name, last_name: user.last_name,phone:user.phone });
    
     if (edit) {
       dispatch(clearEdit());
@@ -47,6 +48,7 @@ const Profile = () => {
   return (
     <div className="container mt-5">
       {errors && errors.map((el) => <Notification error={el} />)}
+  
       {loading && <Spinner animation="border" variant="secondary" />}
       <div className="row">
         <div className="col-lg-4 pb-5">

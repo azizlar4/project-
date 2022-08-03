@@ -88,7 +88,7 @@ exports.updatePassword = async (req, res) => {
 };
 
 //update profile
-exports.updateProfile = async (req, res) => {
+exports.updateMyProfile = async (req, res) => {
   try {
     const user_id = await req.user._id;
     const updatedUser = { ...req.body };
@@ -99,3 +99,17 @@ exports.updateProfile = async (req, res) => {
     res.status(400).send({ errors: [{ msg: "Cannot update profile !!" }] });
   }
 };
+//update profile
+exports.updateProfile = async (req, res) => {
+  try {
+    const { _id } = req.params;
+
+
+    await User.updateOne({ _id }, { $set: { ...req.body } });
+    res.status(200).send({ msg: `profile with id ${_id} is updated` });
+  } catch (error) {
+    res.status(400).send({ errors: [{ msg: "Cannot update profile !!" }] });
+  }
+};
+
+

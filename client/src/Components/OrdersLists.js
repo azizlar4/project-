@@ -29,6 +29,7 @@ const OrdersLists = () => {
               <th>Order #</th>
               <th>Date Purchased</th>
               <th>Status</th>
+              <th>Paid</th>
               <th>Total</th>
             </tr>
           </thead>

@@ -32,6 +32,13 @@ exports.profileValidation = () => [
   check("phone", "Phone number is not valid !!").isFloat({ min: 0}),
 
 ];
+exports.AdminprofileValidation = () => [
+  check("name", "name is required !!").not().isEmpty(),
+  check("last_name", "last name name is required !!").not().isEmpty(),
+  check("phone", "Phone number is not valid !!").isFloat({ min: 0}),
+  check("email", "enter a valid email!!").isEmail(),
+
+];
 exports.passwordValidation = () => [
   check("password", "password is required !!").not().isEmpty(),
 

@@ -64,13 +64,14 @@ export const current_user = () => async (dispatch) => {
     };
     let result = await axios.get("/api/user/current", config);
     dispatch({ type: CURRENT_USER, payload: result.data });
+    dispatch(emptyCart(user_id))
   } catch (error) {
     dispatch({ type: FAIL_USER, payload: error.response.data.errors});
     console.log(error)
 
   }
 };
-//edit Profile
+//edit myProfile
 export const updateProfile = (newProfile) => async (dispatch) => {
   dispatch({ type: LOAD_USER });
   try {
@@ -79,7 +80,22 @@ export const updateProfile = (newProfile) => async (dispatch) => {
         authorization: localStorage.getItem("token"),
       },
     };
-   let result= await axios.put(`/api/user/updateProfile`, newProfile,config);
+   let result= await axios.put(`/api/user/updateMyProfile`, newProfile,config);
+   dispatch({type:EDIT_USER,payload:result.data})
+  } catch (error) {
+    dispatch({ type: FAIL_USER, payload: error.response.data.errors });
+  }
+};
+//edit Profile by admin
+export const updateProfileAdmin = (id,newProfile) => async (dispatch) => {
+  dispatch({ type: LOAD_USER });
+  try {
+    const config = {
+      headers: {
+        authorization: localStorage.getItem("token"),
+      },
+    };
+   let result= await axios.put(`/api/user/updateProfile/${id}`, newProfile,config);
    dispatch({type:EDIT_USER,payload:result.data})
   } catch (error) {
     dispatch({ type: FAIL_USER, payload: error.response.data.errors });

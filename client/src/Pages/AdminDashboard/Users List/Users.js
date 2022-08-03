@@ -1,16 +1,19 @@
 import React, { useEffect } from 'react'
-import { Spinner, Table } from 'react-bootstrap'
+import { Button, Spinner, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
 import UsersRow from '../../../Components/UsersRow';
 import { getUsers } from '../../../JS/Action/user';
 import SideBar from '../SideBar'
 import "../AdminDashboard.css";
+import Notification from '../../../Components/Notification';
 
 const Users = () => {
   
     const load = useSelector((state) => state.userReducer.loadUser);
     const dispatch = useDispatch();
     const listUsers = useSelector((state) => state.userReducer.users);
+    const errors = useSelector((state) => state.userReducer.errors);
+
 
  useEffect(() => {
         dispatch(getUsers());
@@ -18,6 +21,9 @@ const Users = () => {
     
   return (
     <div style={{ backgroundColor: "#4950578a" }}>
+        {errors && errors.map((el) => <Notification  error={el} />)}
+  
+    {load && <Spinner animation="border" variant="secondary" />}
 
       <meta charSet="utf-8" />
       <meta
@@ -48,6 +54,7 @@ const Users = () => {
                 <th>Phone</th>
                 <th>Created at </th>
                 <th>Last Updated </th>
+                <th>Update </th>
               </tr>
             </thead>
             <tbody>
@@ -61,6 +68,7 @@ const Users = () => {
            
             </tbody>
           </Table>
+     
         </div>
         </div>
         </div>
