@@ -1,6 +1,6 @@
 import React from 'react'
 import moment from 'moment';
-import { editPayment, editProduct } from '../../../JS/Action/payment';
+import { editPayment } from '../../../JS/Action/payment';
 import { useDispatch } from 'react-redux';
 
 const OrdersRow = ({order}) => {

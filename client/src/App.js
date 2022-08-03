@@ -6,7 +6,7 @@ import Footer from "./Components/Footer";
 import NavBar from "./Components/NavBar";
 
 import { current_cart } from "./JS/Action/cart";
-import { current_user, getUsers } from "./JS/Action/user";
+import { current_user } from "./JS/Action/user";
 import OrdersControl from "./Pages/AdminDashboard/Orders/OrdersControl";
 
 import Users from "./Pages/AdminDashboard/Users List/Users";

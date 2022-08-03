@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import moment from 'moment';
-import { Button, Spinner } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {  clearEdit, clearErrors, updateProfileAdmin } from '../JS/Action/user';
-import Notification from './Notification';
+
 
 
 const UsersRow = ({user}) => {
   const [User, setUser] = useState();
   const dispatch = useDispatch();
-  const errors = useSelector((state) => state.userReducer.errors);
+;
   const edit = useSelector((state) => state.userReducer.edit);
 
 

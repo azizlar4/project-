@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Notification from "../../Components/Notification";
 import { clearErrors } from "../../JS/Action/cart";
-import { getUserPayments } from "../../JS/Action/payment";
+
 import { clearEdit, updatePassword, updateProfile } from "../../JS/Action/user";
 import "./profile.css";
 
