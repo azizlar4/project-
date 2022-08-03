@@ -114,8 +114,7 @@ body {
     text-transform: UPPERCASE;
     font-weight: bold;
     color: #fff;
-    -webkit-transition: background .3s ease;
-            transition: background .3s ease; }
+    }
     .add-to-cart:hover, .like:hover {
       background: #b36800;
       color: #fff; }
@@ -138,26 +137,4 @@ body {
     background: #0076ad; }
   
   .tooltip-inner {
-    padding: 1.3em; }
-  
-  @-webkit-keyframes opacity {
-    0% {
-      opacity: 0;
-      -webkit-transform: scale(3);
-              transform: scale(3); }
-    100% {
-      opacity: 1;
-      -webkit-transform: scale(1);
-              transform: scale(1); } }
-  
-  @keyframes opacity {
-    0% {
-      opacity: 0;
-      -webkit-transform: scale(3);
-              transform: scale(3); }
-    100% {
-      opacity: 1;
-      -webkit-transform: scale(1);
-              transform: scale(1); } }
-  
-  /*# sourceMappingURL=style.css.map */
+    padding: 1.3em; }  
