@@ -11,7 +11,7 @@ const OrdersRow = ({order}) => {
    
     <tr >
     
-    <td>khalil</td>
+    <td>{order.user_id.email}</td>
     <td>{order.total}€</td>
     <td>{order.cardOwner}</td>
     <td>{order.cardNumber}</td>
