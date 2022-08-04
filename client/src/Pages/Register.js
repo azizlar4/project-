@@ -21,7 +21,7 @@ const handleUser=(e)=>{
     navigate('/')
 }
   return (
-    <div style={{ width: "500px", margin: "auto", marginTop: "40px" }}>
+    <div style={{ width: "500px", margin: "auto", marginTop: "5 px" }}>
           <h3>Sign In</h3>
         <Avatar
           sx={{ m: 1, bgcolor: "secondary.main", margin: "auto" }}
@@ -42,7 +42,7 @@ const handleUser=(e)=>{
         <Form.Control type="text" placeholder="Enter phone" name="phone" onChange={handleChange} />
 
         <Form.Label>Password</Form.Label>
-        <Form.Control type="text" placeholder="Password" name="password" onChange={handleChange}/>
+        <Form.Control type="password" placeholder="Password" name="password" onChange={handleChange}/>
 
         <Button style={{marginTop:"10px",marginBottom:"10px"}} variant="primary" type="submit" onClick={handleUser}>
           register
