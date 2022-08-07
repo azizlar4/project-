@@ -4,8 +4,8 @@
   "description": "projet e-commerce",
   "main": "server.js",
   "scripts": {
-    
-     "build": "cd client  && npm run build"
+    "test": "echo \"Error: no test specified\" && exit 1",
+     "build": "cd client && npm run build"
   },
   "keywords": [
     "node",

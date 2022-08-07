@@ -158,6 +158,7 @@ const handleCardClick =()=>{
           <Button variant="primary" onClick={handleEditProduct}>
             Save Changes
           </Button>
+          
         </Modal.Footer>
       </Modal>
     </div>

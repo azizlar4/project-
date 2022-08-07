@@ -5,6 +5,8 @@ import "./App.css";
 import Footer from "./Components/Footer";
 import NavBar from "./Components/NavBar";
 
+
+
 import { current_cart } from "./JS/Action/cart";
 import { current_user } from "./JS/Action/user";
 import OrdersControl from "./Pages/AdminDashboard/Orders/OrdersControl";
@@ -48,6 +50,8 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
+
+
         <Route path="/product/:id" element={<ProductDetails />} />
          {/* Protected Routes */}
          {isAuth && (<><Route path="/cart" element={<Cart />} />
