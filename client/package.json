@@ -31,10 +31,13 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "run-p start:react api",
+    "start:react": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "api": "cross-env NODE_ENV=testing ARC_LOCAL=1 npx sandbox",
+    "test": "cross-env NODE_ENV=testing PORT=6666 tape test/**/*-test.js test/*-test.js | tap-spec",
+    "serve": "run-s build api"
   },
   "eslintConfig": {
     "extends": [

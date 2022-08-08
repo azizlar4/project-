@@ -20,11 +20,14 @@ app.use('/api/user',require('./routes/user'))
 app.use('/api/payment',require('./routes/payment'))
 app.use('/api/cart',require('./routes/cart'))
 
+app.use(express.static('client/build'));
+app.get('*', (req, res) => res.sendFile(`${__dirname}/client/build/index.html`));
+
 
 //3 port
 const PORT = process.env.PORT;
 
 //4 create server
 
-app.listen(PORT,(err)=>{err?console.error(`failed to connect to the server!! ${err}`):console.log(`server running on ${PORT}...`)})
+app.listen(PORT ||2222,(err)=>{err?console.error(`failed to connect to the server!! ${err}`):console.log(`server running on ${PORT}...`)})
 
